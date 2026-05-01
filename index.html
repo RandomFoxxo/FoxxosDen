@@ -274,6 +274,10 @@
             margin-bottom: 25px;
             text-align: center;
         }
+
+        #digitalClock, #date {
+            text-shadow: 0 0 10px orange;
+        }
     </style>
 </head>
 <body>
@@ -320,6 +324,10 @@
         <div>
             <img class="mainLogoImage" src="./images/FoxxosDenLogo.png">
         </div>
+
+        <!--Time and Date-->
+        <div id="digitalClock"></div>
+        <div id="date"></div>
 
         <div class="intro">
             <p class="introParagraph">
@@ -431,9 +439,30 @@
         <footer>Foxxo's Den 2026</footer>
     </div>
 
-    
-</body>
+    <script>
+        
+        //Digital Clock
+        function Time() {
+            const now = new Date();
 
-<script>
-</script>
+            //local time
+            let hour = String(now.getHours()).padStart(2, '0');
+            let minutes = String(now.getMinutes()).padStart(2, '0');
+            let seconds = String(now.getSeconds()).padStart(2, '0');
+
+            //local date
+            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            let dayName = days[now.getDay()];
+            let monthName = months[now.getMonth()];
+            let dayNum = now.getDate();
+            let year = now.getFullYear();
+
+            document.getElementById('digitalClock').innerHTML = hour + ":" + minutes + ":" + seconds;
+            document.getElementById('date').innerHTML = `${dayName}, ${monthName} ${dayNum}, ${year}`;
+        }
+        Time();
+        setInterval(Time, 1000);
+    </script>
+</body>
 </html>
